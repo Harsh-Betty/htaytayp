@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import EraSelector from "./EraSelector";
-import Search from "./Search";
 
 export default function Header() {
   return (
@@ -10,7 +9,6 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center relative p-4 rounded-full bg-white/10 backdrop-blur-md">
-          {/* Decorative radial gradient behind the header */}
           <div
             className="absolute inset-0 pointer-events-none overflow-hidden rounded-full"
             aria-hidden="true"
@@ -18,10 +16,9 @@ export default function Header() {
             <div className="absolute -inset-1 opacity-30 blur-3xl bg-gradient-radial from-primary to-secondary animate-pulse-slow" />
           </div>
 
-          {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 z-10">
             <div className="flex items-center">
-              <div className="text-2xl md:text-3xl hover:opacity-90 transition-opacity text-text group font-folkevermore">
+              <div className="text-xl md:text-3xl hover:opacity-90 transition-opacity text-text group font-folkevermore">
                 <span className="inline-block transition-transform group-hover:rotate-3 duration-300">
                   <span className="italic">htaytayp</span>
                 </span>
@@ -29,7 +26,6 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Navigation and controls */}
           <div className="flex items-center space-x-2 md:space-x-6 z-10">
             <nav className="hidden md:block">
               <ul className="flex space-x-6">
@@ -47,7 +43,7 @@ export default function Header() {
             </nav>
 
             <div className="flex items-center space-x-2">
-              <Search />
+              {/* <Search /> */}
               <EraSelector />
             </div>
           </div>

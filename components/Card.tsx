@@ -1,14 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
 import { StatusCode } from "../types";
 import { cn } from "@/lib/utils";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
 interface CardProps {
   statusCode: StatusCode;
+  onClick: (statusCode: StatusCode) => void;
 }
 
-export default function Card({ statusCode }: Readonly<CardProps>) {
+export default function Card({ statusCode, onClick }: Readonly<CardProps>) {
   return (
     <div className="block w-full relative">
       {/* Card container */}
@@ -16,6 +16,7 @@ export default function Card({ statusCode }: Readonly<CardProps>) {
         className={cn(
           "group w-full cursor-pointer overflow-hidden relative card h-72 rounded-md shadow-xl flex flex-col justify-end p-4 border border-transparent dark:border-neutral-800"
         )}
+        onClick={() => onClick(statusCode)}
       >
         {/* Image for gif that covers the card */}
         <div className="absolute inset-0 z-0">
@@ -27,13 +28,6 @@ export default function Card({ statusCode }: Readonly<CardProps>) {
             priority
           />
         </div>
-
-        {/* Internal link to status code page - covers most of card */}
-        <Link
-          href={`/${statusCode.code}`}
-          className="absolute inset-0 z-10"
-          aria-label={`View details for HTTP status code ${statusCode.code}`}
-        />
 
         {/* Content overlay */}
         <div className="text relative z-20 mt-auto">

@@ -43,6 +43,16 @@
   src: url("/fonts/taylor-swift.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Font1989";
+  src: url("/fonts/1989.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontTTPD";
+  src: url("/fonts/ttpd.ttf") format("truetype");
+}
+
 .font-eras-tour {
   font-family: "FontErasTour", sans-serif;
 }

@@ -7,7 +7,6 @@ import {
   ReactNode,
 } from "react";
 
-// Define theme types based on Taylor Swift eras
 export type EraTheme =
   | "default"
   | "debut"
@@ -20,13 +19,13 @@ export type EraTheme =
   | "folklore"
   | "evermore"
   | "midnights"
-  | "theTorturedPoetsDepart";
+  | "theTorturedPoetsDepartment";
 interface ThemeContextType {
   currentEra: EraTheme;
   setCurrentEra: (era: EraTheme) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const eraThemeColors = {
   default: {
@@ -81,7 +80,7 @@ export const eraThemeColors = {
     background: "#f0f9ff",
     text: "#003366",
     bodyFont: "'Helvetica Neue', sans-serif",
-    headingFont: "'Helvetica Neue', sans-serif",
+    headingFont: "'Font1989', sans-serif",
   },
   reputation: {
     primary: "#000000", // Black
@@ -128,14 +127,14 @@ export const eraThemeColors = {
     bodyFont: "'FontMidnights', sans-serif",
     headingFont: "'Inter', sans-serif",
   },
-  theTorturedPoetsDepart: {
+  theTorturedPoetsDepartment: {
     primary: "#405160", // Slate Blue
     secondary: "#2a3641",
     accent: "#d6dde4",
     background: "#f2f4f7",
     text: "#1c252e",
     bodyFont: "'Inter', sans-serif",
-    headingFont: "'Inter', sans-serif",
+    headingFont: "'FontTTPD', sans-serif",
   },
 };
 
@@ -143,18 +142,15 @@ export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
   const [currentEra, setCurrentEra] = useState<EraTheme>("default");
   const [mounted, setMounted] = useState(false);
 
-  // Set mounted to true after component mounts to avoid hydration issues
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Apply theme to document when it changes
   useEffect(() => {
     if (!mounted) return;
 
     const theme = eraThemeColors[currentEra];
 
-    // Update CSS variables
     document.documentElement.style.setProperty("--primary", theme.primary);
     document.documentElement.style.setProperty("--secondary", theme.secondary);
     document.documentElement.style.setProperty("--accent", theme.accent);
@@ -169,15 +165,12 @@ export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
       theme.headingFont
     );
 
-    // Add data attribute for additional theme-specific styles
     document.documentElement.setAttribute("data-theme", currentEra);
 
-    // Update body styles directly
     document.body.style.backgroundColor = theme.background;
     document.body.style.color = theme.text;
     document.body.style.fontFamily = theme.bodyFont;
 
-    // For dark themes
     if (currentEra === "reputation" || currentEra === "midnights") {
       document.documentElement.classList.add("dark-theme");
     } else {

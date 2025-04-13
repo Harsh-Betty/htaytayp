@@ -15,7 +15,6 @@ export default function Search() {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  // Filter results based on query
   useEffect(() => {
     if (query) {
       const filtered = statusCodes.filter(

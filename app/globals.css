@@ -79,6 +79,18 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-shine: shine var(--duration) infinite linear;
+  @keyframes shine {
+  0% {
+    background-position: 0% 0%;
+    }
+  50% {
+    background-position: 100% 100%;
+    }
+  to {
+    background-position: 0% 0%;
+    }
+  }
 }
 
 body {
@@ -117,7 +129,6 @@ h6 {
   }
 }
 
-/* Animation for theme transitions */
 .theme-transition {
   transition: all 0.3s ease;
 }
@@ -131,7 +142,6 @@ h6 {
   }
 }
 
-/* Search dropdown animation */
 .search-dropdown {
   animation: dropIn 0.3s ease-out;
 }
@@ -160,12 +170,10 @@ h6 {
   animation: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Add this for the gradient */
 .bg-gradient-radial {
   background-image: radial-gradient(circle, var(--primary) 0%, var(--secondary) 100%);
 }
 
-/* For the glassy effect */
 .backdrop-blur-md {
   backdrop-filter: blur(12px);
 }

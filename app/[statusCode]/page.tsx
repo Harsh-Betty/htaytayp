@@ -3,32 +3,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { statusCodes } from "@/content/codes";
 
-// Define params as a Promise type
 type Params = Promise<{ statusCode: string }>;
 
-// Using SSR approach (no generateStaticParams)
 export default async function StatusCodePage({
   params,
 }: Readonly<{ params: Params }>) {
-  // Need to await the params since it's a Promise
   if (!(await params)?.statusCode) {
     notFound();
   }
 
   try {
-    // Make sure we're working with the actual string from the URL
     const codeString = (await params).statusCode;
 
-    // Remove any file extension if present (e.g., ".gif")
     const cleanCodeString = codeString.replace(/\.\w+$/, "");
     const codeNumber = parseInt(cleanCodeString, 10);
 
-    // Check if code is a valid number
     if (isNaN(codeNumber)) {
       notFound();
     }
 
-    // Find the status code in our data
     const statusCode = statusCodes.find((item) => item.code === codeNumber);
 
     if (!statusCode) {

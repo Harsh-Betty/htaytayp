@@ -23,6 +23,7 @@ export default function Footer() {
               href="http://hrshvrdhn.com"
               target="_blank"
               rel="noopener noreferrer"
+              className="italic font-medium"
             >
               Harshvardhan
             </a>{" "}
@@ -37,6 +38,18 @@ export default function Footer() {
               ? "Eras Tour"
               : currentEra.charAt(0).toUpperCase() + currentEra.slice(1)}{" "}
             Era
+          </p>
+          <p className="text-xs mt-2">
+            Inspired by{" "}
+            <a
+              href="https://http.cat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline italic"
+            >
+              http.cat
+            </a>
+            🐱
           </p>
         </div>
       </div>
