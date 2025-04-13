@@ -86,7 +86,7 @@ export default async function StatusCodePage({
         </div>
       </div>
     );
-  } catch (error) {
+  } catch {
     notFound();
   }
 }
