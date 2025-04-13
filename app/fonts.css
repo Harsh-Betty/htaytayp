@@ -1,0 +1,88 @@
+@font-face {
+  font-family: "FontRed";
+  src: url("/fonts/red.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontLover";
+  src: url("/fonts/lover.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontReputation";
+  src: url("/fonts/reputation.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "FontSpeakNow";
+  src: url("/fonts/speak-now.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontFolkEvermore";
+  src: url("/fonts/folkevermore.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontMidnights";
+  src: url("/fonts/midnights.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontFearless";
+  src: url("/fonts/fearless.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "FontErasTour";
+  src: url("/fonts/eras-tour.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "FontTaylorSwift";
+  src: url("/fonts/taylor-swift.ttf") format("truetype");
+}
+
+.font-eras-tour {
+  font-family: "FontErasTour", sans-serif;
+}
+
+.font-debut {
+  font-family: "FontTaylorSwift", sans-serif;
+}
+
+.font-fearless {
+  font-family: "FontFearless", sans-serif;
+}
+
+.font-speak-now {
+  font-family: "FontSpeakNow", sans-serif;
+}
+
+.font-red {
+  font-family: "FontRed", sans-serif;
+}
+
+.font-1989 {
+  font-family: "Font1989", sans-serif;
+}
+
+.font-reputation {
+  font-family: "FontReputation", sans-serif;
+}
+
+.font-lover {
+  font-family: "FontLover", sans-serif;
+}
+
+.font-folkevermore {
+  font-family: "FontFolkEvermore", sans-serif;
+}
+
+.font-midnights {
+  font-family: "FontMidnights", sans-serif;
+}
+
+.font-ttpd {
+  font-family: "FontTTPD", sans-serif;
+}
