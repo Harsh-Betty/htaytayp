@@ -18,7 +18,7 @@ export default function Header() {
 
           <Link href="/" className="flex items-center space-x-2 z-10">
             <div className="flex items-center">
-              <div className="text-xl md:text-3xl hover:opacity-90 transition-opacity text-text group font-folkevermore">
+              <div className="text-xl md:text-3xl hover:opacity-90 transition-opacity text-text group font-1989">
                 <span className="inline-block transition-transform group-hover:rotate-3 duration-300">
                   <span className="italic">htaytayp</span>
                 </span>

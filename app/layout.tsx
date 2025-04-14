@@ -19,7 +19,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "HTayTayP - HTTP Codes Explained with Taylor Swift",
-  description: "Learn HTTP status codes through Taylor Swift reaction GIFs",
+  description:
+    "Learn HTTP status codes through Taylor Swift reaction GIFs & Images",
 };
 
 export default function RootLayout({
