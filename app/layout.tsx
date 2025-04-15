@@ -41,6 +41,10 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet"
+        ></link>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col`}
@@ -50,7 +54,6 @@ export default function RootLayout({
           <main className="flex-grow py-32">{children}</main>
           <Footer />
           <BackgroundBeams className="-z-50" />
-          {/* <TaylorSwiftBackground className="-z-50" /> */}
         </ThemeProvider>
       </body>
     </html>
