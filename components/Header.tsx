@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import EraSelector from "./EraSelector";
+import Search from "./Search";
 
 export default function Header() {
   return (
@@ -43,7 +44,7 @@ export default function Header() {
             </nav>
 
             <div className="flex items-center space-x-2">
-              {/* <Search /> */}
+              <Search />
               <EraSelector />
             </div>
           </div>

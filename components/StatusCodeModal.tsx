@@ -45,7 +45,7 @@ export default function StatusCodeModal({
           </div>
         </DialogHeader>
 
-        <div className="relative h-96 w-full">
+        <div className="relative h-64 lg:h-96 w-full">
           <Image
             src={statusCode.gifPath}
             alt={`Taylor Swift GIF representing HTTP status code ${statusCode.code}`}

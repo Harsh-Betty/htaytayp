@@ -6,14 +6,19 @@ import {
   PopoverPanel,
   Transition,
 } from "@headlessui/react";
-import { useRouter } from "next/navigation";
 import { statusCodes } from "@/content/codes";
+import { SearchIcon } from "lucide-react";
+import { StatusCode } from "@/types";
+import StatusCodeModal from "./StatusCodeModal";
 
 export default function Search() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(statusCodes);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
+  const [buttonRef, setButtonRef] = useState<HTMLButtonElement | null>(null);
+
+  const [selectedCode, setSelectedCode] = useState<StatusCode | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (query) {
@@ -29,27 +34,47 @@ export default function Search() {
     }
   }, [query]);
 
-  const handleSelect = (code: number) => {
-    router.push(`/${code}`);
-    setQuery("");
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+        event.preventDefault();
+        buttonRef?.click();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [buttonRef]);
+
+  const handleSelect = (code: StatusCode) => {
+    setSelectedCode(code);
+    setIsModalOpen(true);
   };
 
   return (
-    <Popover className="relative">
-      {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
-      {({ open, close }) => (
+    <Popover className="static">
+      {({ close }) => (
         <>
-          <PopoverButton className="flex items-center space-x-2 px-4 py-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white transition-all focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-            </svg>
-            <span className="font-medium">Search</span>
+          <PopoverButton
+            ref={setButtonRef}
+            className="flex items-center space-x-2 px-4 py-2 rounded-full transition-all focus:outline-none focus:ring-2"
+            style={
+              {
+                backgroundColor: "var(--primary)",
+                color: "var(--text)",
+                "--tw-ring-color": "var(--secondary)",
+                "--tw-ring-offset-color": "var(--background)",
+              } as React.CSSProperties
+            }
+          >
+            <SearchIcon className="w-4 h-4" />
+
+            <span className="hidden md:inline font-medium">Search</span>
+            <kbd className="hidden md:inline-flex ml-2 items-center rounded border border-gray-200 px-1.5 text-xs text-gray-400">
+              ⌘K
+            </kbd>
           </PopoverButton>
 
           <Transition
@@ -62,17 +87,28 @@ export default function Search() {
             leaveTo="opacity-0 translate-y-1"
             afterEnter={() => inputRef.current?.focus()}
           >
-            <PopoverPanel className="absolute right-0 mt-2 w-96 bg-white rounded-lg shadow-lg overflow-hidden z-[9999] border border-gray-200">
-              <div className="p-3 border-b border-gray-200">
+            <PopoverPanel
+              className="absolute top-full right-0 mt-2 max-w-full lg:max-w-lg rounded-lg shadow-lg overflow-hidden z-[9999] border"
+              style={{
+                backgroundColor: "var(--background)",
+                borderColor: "var(--primary)",
+              }}
+            >
+              <div
+                className="p-3 border-b"
+                style={{ borderColor: "var(--primary)" }}
+              >
                 <input
                   ref={inputRef}
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search for HTTP status codes..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2"
+                  className="w-full px-3 py-2 border rounded-full focus:outline-none focus:ring-2"
                   style={
                     {
+                      backgroundColor: "var(--background)",
+                      color: "var(--text)",
                       borderColor: "var(--primary)",
                       "--tw-ring-color": "var(--primary)",
                     } as React.CSSProperties
@@ -82,16 +118,20 @@ export default function Search() {
 
               <div className="max-h-64 overflow-y-auto py-2">
                 {results.length === 0 ? (
-                  <div className="px-4 py-3 text-gray-500 italic text-center">
+                  <div
+                    className="px-4 py-3 italic text-center"
+                    style={{ color: "var(--text)" }}
+                  >
                     No results found. Try a different search.
                   </div>
                 ) : (
                   results.map((code) => (
                     <button
                       key={code.code}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center"
+                      className="max-w-full overflow-hidden text-left px-4 py-2 flex items-center hover:opacity-80"
+                      style={{ color: "var(--text)" }}
                       onClick={() => {
-                        handleSelect(code.code);
+                        handleSelect(code);
                         close();
                       }}
                     >
@@ -104,11 +144,11 @@ export default function Search() {
                           }}
                         />
                       </div>
-                      <div className="ml-3">
+                      <div className="ml-3 max-w-full overflow-hidden">
                         <div className="font-medium">
                           {code.code} {code.title}
                         </div>
-                        <div className="text-sm text-gray-500 truncate">
+                        <div className="text-sm opacity-70 truncate">
                           {code.description}
                         </div>
                       </div>
@@ -118,6 +158,12 @@ export default function Search() {
               </div>
             </PopoverPanel>
           </Transition>
+
+          <StatusCodeModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            statusCode={selectedCode}
+          />
         </>
       )}
     </Popover>
